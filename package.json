@@ -10,9 +10,11 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@sidebase/nuxt-auth": "^0.10.0",
     "@vite-pwa/nuxt": "^0.10.6",
     "@vueuse/nuxt": "^12.4.0",
     "flowbite": "^2.5.2",
+    "next-auth": "~4.21.1",
     "nuxt": "^3.14.1592",
     "vue": "latest",
     "vue-router": "latest"

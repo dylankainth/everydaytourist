@@ -10,7 +10,16 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@vite-pwa/nuxt',
     '@vueuse/nuxt',
+    '@sidebase/nuxt-auth'
   ],
+  auth: {
+    provider: {
+      type: 'authjs',
+      trustHost: false,
+      defaultProvider: 'google',
+      addDefaultCallbackUrl: true
+    }
+  },
   pwa: {
     manifest: {
       name: 'EveryDayTourist',

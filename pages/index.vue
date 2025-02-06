@@ -1,3 +1,9 @@
+<script setup>
+
+const { data } = useAuth()
+</script>
+
+
 <template>
   <div>
 
@@ -5,6 +11,7 @@
 
 
       <p class="text-3xl">Welcome</p>
+      Hello {{ data }}!
       <p class="text-lg text-gray-500">Let's find you some deals.</p>
 
 
@@ -13,4 +20,3 @@
   </div>
 
 </template>
-
