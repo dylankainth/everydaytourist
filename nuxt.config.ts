@@ -13,13 +13,13 @@ export default defineNuxtConfig({
   ],
   pwa: {
     manifest: {
-      name: 'My Nuxt 3 App',
-      short_name: 'NuxtApp',
+      name: 'EveryDayTourist',
+      short_name: 'EveryDayYourist',
       start_url: '/',
       display: 'standalone',
       background_color: '#ffffff',
       theme_color: '#ffffff',
-      icons : [
+      icons: [
         {
           src: '/image.png',
           sizes: '192x192',
