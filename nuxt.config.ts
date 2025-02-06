@@ -13,11 +13,12 @@ export default defineNuxtConfig({
     '@sidebase/nuxt-auth'
   ],
   auth: {
+    globalAppMiddleware: true,
     provider: {
       type: 'authjs',
       trustHost: false,
       defaultProvider: 'google',
-      addDefaultCallbackUrl: true
+      addDefaultCallbackUrl: true,
     }
   },
   pwa: {
