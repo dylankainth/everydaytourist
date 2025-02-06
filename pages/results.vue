@@ -1,3 +1,6 @@
+<script setup>
+const resultState = ref('list')
+</script>
 <template>
 
     <div class="container mx-auto px-5 pt-3 pb-5">
@@ -7,20 +10,22 @@
 
         <div class="flex justify-center pt-2">
             <div class="inline-flex rounded-lg shadow-sm" role="group">
-                <button type="button"
-                    class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-500 focus:text-blue-700 flex items-center">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white mr-2" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <button type="button" @click="resultState = 'list'"
+                    :class="['px-4 py-2 text-sm font-medium text-gray-900 border border-gray-200 rounded-l-lg flex items-center', resultState === 'list' ? 'bg-columbia-500 text-white' : 'bg-white']">
+                    <svg :class="['w-6 h-6 mr-2', resultState === 'list' ? 'text-white' : 'text-gray-800']"
+                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                        viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
                             d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5" />
                     </svg>
                     List View
                 </button>
 
-                <button type="button"
-                    class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-500 focus:text-blue-700 flex items-center">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white mr-2" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <button type="button" @click="resultState = 'map'"
+                    :class="['px-4 py-2 text-sm font-medium text-gray-900 border border-gray-200 rounded-r-lg flex items-center', resultState === 'map' ? 'bg-columbia-500 text-white' : 'bg-white']">
+                    <svg :class="['w-6 h-6 mr-2', resultState === 'map' ? 'text-white' : 'text-gray-800']"
+                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                        viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
