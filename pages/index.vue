@@ -9,6 +9,7 @@ const { data } = useAuth()
 
     <div class="container mx-auto px-5 pt-3 pb-5">
       <div class="hero text-center my-10">
+        <img src="/logo.svg" alt="Everyday Tourist Logo" class="w-32 h-32 mx-auto" />
         <h1 class="text-5xl font-bold">Everyday Tourist</h1>
         <p class="text-xl mt-4">Discover new places and experiences every day</p>
 

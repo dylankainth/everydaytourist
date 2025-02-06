@@ -1,5 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  app: {
+    head: {
+      link: [
+        { rel: 'icon', type: 'image/svg', href: '/logo.svg' }
+      ]
+    }
+  },
   devServer: {
     port: 8020
   },
@@ -37,9 +44,9 @@ export default defineNuxtConfig({
       theme_color: '#ffffff',
       icons: [
         {
-          src: '/image.png',
+          src: '/logo.svg',
           sizes: '192x192',
-          type: 'image/png',
+          type: 'image/svg',
         },
       ]
     },
