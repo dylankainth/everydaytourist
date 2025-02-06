@@ -1,12 +1,14 @@
 <template>
     <div>
-        <h1>Requirements</h1>
-        <p>Here are the requirements for this project:</p>
-        <ul>
-            <li>Node.js</li>
-            <li>Yarn</li>
-            <li>Visual Studio Code</li>
-            <li>Git</li>
-        </ul>
+
+        <div class="container mx-auto px-5 pt-3 pb-5">
+
+            <p class="text-3xl">Welcome</p>
+            <p class="text-lg text-gray-500">Let's find you some deals.</p>
+
+
+        </div>
+
     </div>
+
 </template>

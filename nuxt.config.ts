@@ -10,8 +10,14 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@vite-pwa/nuxt',
     '@vueuse/nuxt',
-    '@sidebase/nuxt-auth'
+    '@sidebase/nuxt-auth',
+    '@nuxtjs/google-fonts'
   ],
+  googleFonts: {
+    families: {
+      Poppins: true
+    }
+  },
   auth: {
     globalAppMiddleware: true,
     provider: {
