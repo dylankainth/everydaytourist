@@ -11,8 +11,8 @@ export default defineNuxtConfig({
     port: 8020
   },
   routeRules: {
-    '/api/**': {
-      proxy: process.env.NODE_ENV === "development" ? "http://127.0.0.1:8000/api/**" : "/api/**",
+    '/pyapi/**': {
+      proxy: process.env.NODE_ENV === "development" ? "http://127.0.0.1:8000/pyapi/**" : "/pyapi/**",
     },
     '/docs': {
       proxy: "http://127.0.0.1:8000/docs",

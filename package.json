@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "fastapi-dev": "pip3 install -r requirements.txt --break-system-packages && python3 -m uvicorn pyapi.index:app --reload",
+    "nuxt-dev": "nuxt dev",
+    "dev": "concurrently \"npm run nuxt-dev\" \"npm run fastapi-dev\"",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -21,6 +23,7 @@
     "vue-router": "latest"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6.12.2"
+    "@nuxtjs/tailwindcss": "^6.12.2",
+    "concurrently": "^8.2.2"
   }
 }
