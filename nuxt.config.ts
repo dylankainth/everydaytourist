@@ -34,13 +34,19 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
+  leaflet: {
+    /* Optional configurations */
+    css: true,  // Automatically include Leaflet's CSS
+    useGlobalLeaflet: true // Avoid conflicts if using Leaflet in other libraries
+  },
   modules: [
     '@nuxtjs/tailwindcss',
     '@vite-pwa/nuxt',
     '@vueuse/nuxt',
     '@sidebase/nuxt-auth',
     '@nuxtjs/google-fonts',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    '@nuxtjs/leaflet'
   ],
   googleFonts: {
     families: {

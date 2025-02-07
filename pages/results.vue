@@ -130,8 +130,30 @@ export default {
 
             </div>
 
-            <div v-if="resultState === 'map'">
-                map
+            <div class="pt-5" v-if="resultState === 'map'">
+
+
+                <LMap style="width:90vw;height:60vh" :zoom="15"
+                    :center="[jsonData.output.location.coords.latitude, jsonData.output.location.coords.longitude]"
+                    :use-global-leaflet="false">
+                    <LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
+                        layer-type="base" name="OpenStreetMap" />
+
+                    <LMarker
+                        :lat-lng="[jsonData.output.location.coords.latitude, jsonData.output.location.coords.longitude]">
+                    </LMarker>
+
+                    <div v-for="pin in data.body">
+
+                        <LMarker :lat-lng="[pin.lat, pin.lon]">
+                            <LPopup>
+                                <p>{{ pin.title }}</p>
+                            </LPopup>
+                        </LMarker>
+                    </div>
+                </LMap>
+
             </div>
 
         </div>
