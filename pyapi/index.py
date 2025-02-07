@@ -4,7 +4,26 @@ from fastapi import Request
 import wikipedia
 from datetime import datetime, timedelta
 import os
+from transformers import DistilBertTokenizer, DistilBertForSequenceClassification
+import torch
 app = FastAPI()
+
+# Load model and tokenizer from the saved folder
+model_path = "DylanKainth/indooroutdoor"
+
+model = DistilBertForSequenceClassification.from_pretrained(model_path)
+tokenizer = DistilBertTokenizer.from_pretrained(model_path)
+
+classes = ['indoor', 'outdoor']
+
+# Prediction function
+def predict_activity(text):
+    inputs = tokenizer(text, return_tensors='pt', padding=True, truncation=True, max_length=512)
+    with torch.no_grad():
+        outputs = model(**inputs)
+    logits = outputs.logits
+    predicted_class_id = torch.argmax(logits).item()
+    return classes[predicted_class_id]
 
 @app.get("/pyapi")
 def get_wikipedia_pageviews(article, days = 90):
@@ -101,6 +120,10 @@ def add_wikipedia_page_data(mainData):
         # get the summary of the page
         location['summary'] = page.summary
 
+def add_prediction_data(mainData):
+    for location in mainData:
+        # predict the activity of the location
+        location['activity'] = predict_activity(location['summary'])
 
 @app.post("/pyapi/generateRanking")
 async def generate_ranking(request: Request):
@@ -114,8 +137,14 @@ async def generate_ranking(request: Request):
     mainData = get_wikipedia_nearby(radius, lat, lon)
     add_wikipedia_pageviews(mainData)
     add_walking_time(mainData, lat, lon)
-    #add_wikipedia_page_data(mainData)
+    add_wikipedia_page_data(mainData)
+    add_prediction_data(mainData)
 
+    # body['outdoorActivities'] is a boolean, filter the mainData based on the activity
+    if body['outdoorActivities']:
+        mainData = [location for location in mainData if location['activity'] == 'outdoor']
+    else:
+        mainData = [location for location in mainData if location['activity'] == 'indoor']
 
     return {"message": "all good", "body": mainData}
 
