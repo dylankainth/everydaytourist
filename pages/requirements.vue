@@ -125,7 +125,7 @@
             <div class="pt-6 flex justify-center" v-if="location.data && weather.outdoorActivities != null">
                 <div class="flex items-center p-4 ">
                     <div class="px-2 w-full">
-                        <button type="button"
+                        <button type="button" @click="submit"
                             class="text-white bg-columbia-600 hover:bg-columbia-700 focus:ring-4 focus:ring-columbia-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-columbia-600 dark:hover:bg-columbia-700 focus:outline-none dark:focus:ring-columbia-800">
                             Submit</button>
                     </div>
@@ -144,9 +144,12 @@
 
 
 <script>
+import { useDataStore } from '~/stores/dataStore'
+
 export default {
     data() {
         return {
+            dataStore: useDataStore(),
             location: {
                 status: 'waiting',
                 data: null,
@@ -174,6 +177,17 @@ export default {
                 this.location.status = 'error';
                 console.error(err);
             }
+        },
+        submit() {
+            const newEntry = {
+                location: this.location.data,
+                outdoorActivities: this.weather.outdoorActivities,
+                walkingDistance: this.walkingDistance
+            }
+            this.dataStore.updateData({ [newEntry.id]: newEntry })
+
+            // route the user to the results page
+            this.$router.push('/results')
         }
     },
 
