@@ -3,7 +3,7 @@ import requests
 from fastapi import Request
 import wikipedia
 from datetime import datetime, timedelta
-
+import os
 app = FastAPI()
 
 @app.get("/pyapi")
@@ -81,7 +81,18 @@ def add_wikipedia_pageviews(mainData):
             print(f"Error {response.status_code}: {response.text}")
             return None
 
-        
+def add_walking_time(mainData, lat, lon):
+    for location in mainData:
+        # use osrm API to get walking time, url = https://osrm.services.dylankainth.com/
+        url = f"https://osrm.services.dylankainth.com/route/v1/foot/{lon},{lat};{location['lon']},{location['lat']}?overview=false"
+
+        # Make API request
+        response = requests.get(url)
+
+        responseData = response.json()
+
+        #set they key of 'walkingTime' of location to the duration value from the response
+        location['walkingTime'] = responseData['routes'][0]['duration']
 
 @app.post("/pyapi/generateRanking")
 async def generate_ranking(request: Request):
@@ -92,24 +103,9 @@ async def generate_ranking(request: Request):
     lon = body['location']['coords']['longitude']
     radius = body['walkingDistance']
 
-
-
     mainData = get_wikipedia_nearby(radius, lat, lon)
     add_wikipedia_pageviews(mainData)
-
-
-
-    # for location in (responseData['query']['geosearch']):
-    #     print(location['title'])
-    #     title = location['title']
-    #     views = get_wikipedia_pageviews(title)
-    #     if views is not None
-
-    
-
-
-    # end_date = datetime.today().strfttime("%Y-%m-%d")
-    # start_date = (datetime.today() - timedelta(days=90)).strftime("%Y-%m-%d")
+    add_walking_time(mainData, lat, lon)
 
 
     return {"message": "Request body printed", "body": mainData}
