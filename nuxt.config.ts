@@ -52,7 +52,7 @@ export default defineNuxtConfig({
     baseURL: process.env.AUTH_ORIGIN,
     originEnvKey: 'AUTH_ORIGIN',
     globalAppMiddleware: true,
-    disableServerSideAuth: true,
+    // disableServerSideAuth: true,
     provider: {
       type: 'authjs',
       trustHost: false,

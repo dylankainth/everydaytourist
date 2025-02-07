@@ -5,7 +5,7 @@
   "scripts": {
     "build": "nuxt build",
     "fastapi-dev": "pip3 install -r requirements.txt --break-system-packages && python3 -m uvicorn pyapi.index:app --reload",
-    "nuxt-dev": "nuxt dev",
+    "nuxt-dev": "nuxt dev --no-fork",
     "dev": "concurrently \"npm run nuxt-dev\" \"npm run fastapi-dev\"",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
