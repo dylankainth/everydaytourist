@@ -94,6 +94,14 @@ def add_walking_time(mainData, lat, lon):
         #set they key of 'walkingTime' of location to the duration value from the response
         location['walkingTime'] = responseData['routes'][0]['duration']
 
+def add_wikipedia_page_data(mainData):
+    for location in mainData:
+        # get the wikipedia page data
+        page = wikipedia.page(location['title'])
+        # get the summary of the page
+        location['summary'] = page.summary
+
+
 
 @app.post("/pyapi/generateRanking")
 async def generate_ranking(request: Request):
@@ -107,6 +115,7 @@ async def generate_ranking(request: Request):
     mainData = get_wikipedia_nearby(radius, lat, lon)
     add_wikipedia_pageviews(mainData)
     add_walking_time(mainData, lat, lon)
+    add_wikipedia_page_data(mainData)
 
 
     return {"message": "all good", "body": mainData}
