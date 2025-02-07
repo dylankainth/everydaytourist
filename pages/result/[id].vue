@@ -16,28 +16,23 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
-
 export default {
-    setup() {
-        const route = useRoute();
-        const result = ref(null);
-
-        onMounted(async () => {
-            const id = route.params.id;
-
-            try {
-                const response = await fetch(`/pyapi/getPage?id=${id}`);
-                result.value = await response.json();
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        });
-
+    data() {
         return {
-            result
+            result: {},
         };
+    },
+    async mounted() {
+        const route = useRoute()
+        const id = route.params.id;
+
+        try {
+            const response = await fetch(`/pyapi/getPage?id=${id}`);
+            this.result = await response.json();
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
     }
 };
 </script>
