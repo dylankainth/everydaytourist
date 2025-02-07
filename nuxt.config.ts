@@ -65,11 +65,18 @@ export default defineNuxtConfig({
       display: 'standalone',
       background_color: '#ffffff',
       theme_color: '#ffffff',
+      description: 'Discover new places and experiences every day',
+      lang: 'en',
       icons: [
         {
           src: '/logo.svg',
           sizes: '192x192',
           type: 'image/svg',
+        },
+        {
+          src: '/logo512.png',
+          sizes: '512x512',
+          type: 'image/png',
         },
       ]
     },
