@@ -94,6 +94,7 @@ def add_walking_time(mainData, lat, lon):
         #set they key of 'walkingTime' of location to the duration value from the response
         location['walkingTime'] = responseData['routes'][0]['duration']
 
+
 @app.post("/pyapi/generateRanking")
 async def generate_ranking(request: Request):
     body = await request.json()
@@ -108,4 +109,4 @@ async def generate_ranking(request: Request):
     add_walking_time(mainData, lat, lon)
 
 
-    return {"message": "Request body printed", "body": mainData}
+    return {"message": "all good", "body": mainData}

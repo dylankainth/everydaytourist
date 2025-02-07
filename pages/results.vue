@@ -3,7 +3,11 @@ import { useDataStore } from '~/stores/dataStore'
 
 export default {
 
-
+    methods: {
+        walkingTimeMins(seconds) {
+            return Math.round(seconds / 60)
+        }
+    },
 
     computed: {
         jsonData() {
@@ -87,11 +91,45 @@ export default {
                         Map View
                     </button>
                 </div>
+
+
             </div>
 
-            {{ data }}
+            <div class="pt-5">
+
+                <div v-for="card in data.body" class="pt-2">
+                    <a href="#"
+                        class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ card.title
+                            }}
+                        </h5>
+
+                        <p class="font-normal text-gray-700 dark:text-gray-400 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                                fill="#5f6368">
+                                <path
+                                    d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z" />
+                            </svg>
+                            &nbsp; {{ card.views }} Wikipedia Views
+                        </p>
+
+                        <p class="font-normal text-gray-700 dark:text-gray-400 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                                fill="#5f6368" class="mr-2">
+                                <path
+                                    d="m280-40 112-564-72 28v136h-80v-188l202-86q14-6 29.5-7t29.5 4q14 5 26.5 14t20.5 23l40 64q26 42 70.5 69T760-520v80q-70 0-125-29t-94-74l-25 123 84 80v300h-80v-260l-84-64-72 324h-84Zm260-700q-33 0-56.5-23.5T460-820q0-33 23.5-56.5T540-900q33 0 56.5 23.5T620-820q0 33-23.5 56.5T540-740Z" />
+                            </svg>
+                            {{ walkingTimeMins(card.walkingTime) }} minutes
+                        </p>
+
+                    </a>
+
+                </div>
+
+
+            </div>
 
         </div>
-
     </div>
 </template>
