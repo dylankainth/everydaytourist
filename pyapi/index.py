@@ -7,7 +7,6 @@ import os
 
 app = FastAPI()
 
-@app.get("/pyapi")
 def get_wikipedia_pageviews(article, days = 90):
     end_date = datetime.today().strftime("%Y-%m-%d")
     start_date = (datetime.today() - timedelta(days=days)).strftime("%Y-%m-%d")
@@ -126,3 +125,7 @@ async def generate_ranking(request: Request):
 def get_page(id: int):
     page = wikipedia.page(pageid=id)
     return {"title": page.title, "summary": page.summary}
+
+@app.get("/pyapi")
+def read_root():
+    return {"message": "Hello World", "api": "all online"}
