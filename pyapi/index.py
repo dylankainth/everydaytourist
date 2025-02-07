@@ -25,8 +25,6 @@ def get_wikipedia_pageviews(article, days = 90):
     else:
         print("Error: Unable to fetch data")
 
-def hello_world():
-
     return {"message": "Hello World", "api": "all online"}
 
 
@@ -120,14 +118,7 @@ async def generate_ranking(request: Request):
     add_wikipedia_pageviews(mainData)
     add_walking_time(mainData, lat, lon)
     add_wikipedia_page_data(mainData)
-    #add_prediction_data(mainData)
-
-    # body['outdoorActivities'] is a boolean, filter the mainData based on the activity
-    #if body['outdoorActivities']:
-        #mainData = [location for location in mainData if location['activity'] == 'outdoor']
-    #else:
-        #mainData = [location for location in mainData if location['activity'] == 'indoor']
-
+   
     return {"message": "all good", "body": mainData}
 
 # get pageId from qsp and then go to wikipedia and get page info with that id
