@@ -102,7 +102,6 @@ def add_wikipedia_page_data(mainData):
         location['summary'] = page.summary
 
 
-
 @app.post("/pyapi/generateRanking")
 async def generate_ranking(request: Request):
     body = await request.json()
@@ -115,7 +114,13 @@ async def generate_ranking(request: Request):
     mainData = get_wikipedia_nearby(radius, lat, lon)
     add_wikipedia_pageviews(mainData)
     add_walking_time(mainData, lat, lon)
-    add_wikipedia_page_data(mainData)
+    #add_wikipedia_page_data(mainData)
 
 
     return {"message": "all good", "body": mainData}
+
+# get pageId from qsp and then go to wikipedia and get page info with that id
+@app.get("/pyapi/getPage")
+def get_page(id: int):
+    page = wikipedia.page(pageid=id)
+    return {"title": page.title, "summary": page.summary}

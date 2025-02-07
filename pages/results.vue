@@ -24,6 +24,10 @@ export default {
     },
     async mounted() {
 
+        if (this.jsonData.output === null) {
+            this.$router.push('/requirements')
+        }
+
         const response = await fetch('/pyapi/generateRanking', {
             method: 'POST',
             headers: {
@@ -98,7 +102,7 @@ export default {
             <div class="pt-5" v-if="resultState === 'list'">
 
                 <div v-for="card in data.body" class="pt-2">
-                    <a href="#"
+                    <NuxtLink :to="'/result/' + card.pageid"
                         class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ card.title
@@ -123,7 +127,7 @@ export default {
                             {{ walkingTimeMins(card.walkingTime) }} minutes
                         </p>
 
-                    </a>
+                    </NuxtLink>
 
                 </div>
 
@@ -148,7 +152,8 @@ export default {
 
                         <LMarker :lat-lng="[pin.lat, pin.lon]">
                             <LPopup>
-                                <p>{{ pin.title }}</p>
+                                <NuxtLink :to="'/result/' + pin.pageid">{{ pin.title }}</NuxtLink>
+
                             </LPopup>
                         </LMarker>
                     </div>

@@ -1,9 +1,43 @@
 <template>
+    <div class="container mx-auto px-5 pt-3 pb-5">
+        <p class="text-3xl">Your results</p>
+        <p class="text-lg text-gray-500">We found this for you.</p>
 
-    <LMap style="height: 350px" :zoom="6" :center="[47.21322, -1.559482]" :use-global-leaflet="false">
-        <LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
-            layer-type="base" name="OpenStreetMap" />
-    </LMap>
+        <div
+            class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ result.title
+                }}
+            </h5>
+
+            <p>{{ result.summary }}</p>
+        </div>
+    </div>
 </template>
+
+<script>
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+
+export default {
+    setup() {
+        const route = useRoute();
+        const result = ref(null);
+
+        onMounted(async () => {
+            const id = route.params.id;
+
+            try {
+                const response = await fetch(`/pyapi/getPage?id=${id}`);
+                result.value = await response.json();
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+
+        return {
+            result
+        };
+    }
+};
+</script>
