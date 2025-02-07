@@ -4,26 +4,8 @@ from fastapi import Request
 import wikipedia
 from datetime import datetime, timedelta
 import os
-from transformers import DistilBertTokenizer, DistilBertForSequenceClassification
-import torch
+
 app = FastAPI()
-
-# Load model and tokenizer from the saved folder
-model_path = "DylanKainth/indooroutdoor"
-
-model = DistilBertForSequenceClassification.from_pretrained(model_path)
-tokenizer = DistilBertTokenizer.from_pretrained(model_path)
-
-classes = ['indoor', 'outdoor']
-
-# Prediction function
-def predict_activity(text):
-    inputs = tokenizer(text, return_tensors='pt', padding=True, truncation=True, max_length=512)
-    with torch.no_grad():
-        outputs = model(**inputs)
-    logits = outputs.logits
-    predicted_class_id = torch.argmax(logits).item()
-    return classes[predicted_class_id]
 
 @app.get("/pyapi")
 def get_wikipedia_pageviews(article, days = 90):
