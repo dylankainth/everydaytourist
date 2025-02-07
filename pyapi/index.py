@@ -141,10 +141,10 @@ async def generate_ranking(request: Request):
     add_prediction_data(mainData)
 
     # body['outdoorActivities'] is a boolean, filter the mainData based on the activity
-    if body['outdoorActivities']:
-        mainData = [location for location in mainData if location['activity'] == 'outdoor']
-    else:
-        mainData = [location for location in mainData if location['activity'] == 'indoor']
+    #if body['outdoorActivities']:
+        #mainData = [location for location in mainData if location['activity'] == 'outdoor']
+    #else:
+        #mainData = [location for location in mainData if location['activity'] == 'indoor']
 
     return {"message": "all good", "body": mainData}
 
