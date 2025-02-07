@@ -184,7 +184,7 @@ export default {
                 outdoorActivities: this.weather.outdoorActivities,
                 walkingDistance: this.walkingDistance
             }
-            this.dataStore.updateData({ [newEntry.id]: newEntry })
+            this.dataStore.updateData({ output: newEntry })
 
             // route the user to the results page
             this.$router.push('/results')
