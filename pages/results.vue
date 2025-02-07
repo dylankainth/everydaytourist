@@ -95,7 +95,7 @@ export default {
 
             </div>
 
-            <div class="pt-5">
+            <div class="pt-5" v-if="resultState === 'list'">
 
                 <div v-for="card in data.body" class="pt-2">
                     <a href="#"
@@ -128,6 +128,10 @@ export default {
                 </div>
 
 
+            </div>
+
+            <div v-if="resultState === 'map'">
+                map
             </div>
 
         </div>
