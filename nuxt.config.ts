@@ -26,8 +26,8 @@ export default defineNuxtConfig({
     vercel: {
       config: {
         routes: [{
-          "src": "/api/(.*)",
-          "dest": "api/index.py"
+          "src": "/pyapi/(.*)",
+          "dest": "pyapi/index.py"
         }]
       }
     },
