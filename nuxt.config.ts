@@ -32,7 +32,6 @@ export default defineNuxtConfig({
       }
     },
   },
-  ssr: false,
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
   modules: [
@@ -49,14 +48,18 @@ export default defineNuxtConfig({
     }
   },
   auth: {
+
     baseURL: process.env.AUTH_ORIGIN,
+    originEnvKey: 'AUTH_ORIGIN',
     globalAppMiddleware: true,
+    disableServerSideAuth: true,
     provider: {
       type: 'authjs',
       trustHost: false,
       defaultProvider: 'google',
       addDefaultCallbackUrl: true,
-    }
+    },
+
   },
   pwa: {
     manifest: {
