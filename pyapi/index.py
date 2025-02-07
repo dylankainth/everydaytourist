@@ -138,7 +138,7 @@ async def generate_ranking(request: Request):
     add_wikipedia_pageviews(mainData)
     add_walking_time(mainData, lat, lon)
     add_wikipedia_page_data(mainData)
-    add_prediction_data(mainData)
+    #add_prediction_data(mainData)
 
     # body['outdoorActivities'] is a boolean, filter the mainData based on the activity
     #if body['outdoorActivities']:
